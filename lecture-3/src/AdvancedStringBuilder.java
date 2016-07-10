@@ -1,9 +1,8 @@
-/**
- * Created by admin on 23.06.2016.
- */
+
 public class AdvancedStringBuilder {
 
-    StringBuilder S=new StringBuilder();
+    StringBuilder S = new StringBuilder();
+    StringBuilder SS;
 
     public static void main(String[] args) {
         AdvancedStringBuilder asb = new AdvancedStringBuilder();
@@ -22,26 +21,25 @@ public class AdvancedStringBuilder {
     }
 
     public AdvancedStringBuilder(String string) {
-        S = new StringBuilder(string);
+        SS = new StringBuilder(string);
+
     }
 
     void clear() {
-       S.setLength(0);
+        S.setLength(0);
     }
 
     public String toString() {
-
         return S.toString();
     }
 
+
     public void leftAppend(String string) {
-        StringBuilder sb = new StringBuilder(string);
-        S = sb.append(S);
+        S = new StringBuilder(string).append(S);
     }
 
     public void rightAppend(String string) {
-        StringBuilder sb = new StringBuilder(string);
-        S = sb.insert(0, S);
+        S = S.append(string);
     }
 
 }

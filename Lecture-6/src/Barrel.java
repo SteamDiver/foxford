@@ -1,7 +1,5 @@
-import java.util.concurrent.ExecutionException;
-
 public class Barrel {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SameBarrelException {
         Barrel a = new Barrel(5);
         Barrel b = new Barrel(7);
         a.fill();
@@ -20,7 +18,7 @@ public class Barrel {
         CurrentV = 0;
     }
 
-    void pourTo(Barrel barrel) {
+    void pourTo(Barrel barrel) throws SameBarrelException{
 
             if (this.CurrentV < barrel.V - barrel.CurrentV) {
                 barrel.CurrentV += this.CurrentV;
@@ -32,7 +30,7 @@ public class Barrel {
 
     }
 
-    void pourFrom(Barrel barrel) {
+    void pourFrom(Barrel barrel) throws SameBarrelException {
         barrel.pourTo(this);
 
     }
@@ -48,6 +46,10 @@ public class Barrel {
 
     void fill() {
         this.CurrentV = V;
+    }
+
+    public class SameBarrelException extends Throwable {
+
     }
 
 }

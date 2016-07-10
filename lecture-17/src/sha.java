@@ -1,21 +1,32 @@
+import javax.xml.bind.DatatypeConverter;
 import java.io.*;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class sha {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-        //BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
+
         File input = new File("input.txt");
-        FileReader reader = new FileReader(input.getAbsoluteFile());
-        String s = reader.toString();
+        StringBuilder sb = new StringBuilder();
+        BufferedReader in = new BufferedReader(new FileReader(input));
+        String s;
+        while ((s = in.readLine()) != null) {
+            sb.append(s);
+            sb.append("\n");
+        }
+        in.close();
+        String text=sb.toString().trim();
 
 
 
-        MessageDigest m=MessageDigest.getInstance("SHA-256");
-        m.update(s.getBytes(),0,s.length());
+        MessageDigest m = MessageDigest.getInstance("SHA-256");
+        String outhash = DatatypeConverter.printHexBinary(m.digest(text.getBytes()));
+
         File output = new File("output.txt");
-        PrintWriter out = new PrintWriter(output.getAbsoluteFile());
-        out.print(new BigInteger(1,m.digest()).toString(16));
+        BufferedWriter out = new BufferedWriter(new FileWriter(output));
+        out.write(outhash);
+        out.close();
     }
+
+
 }
